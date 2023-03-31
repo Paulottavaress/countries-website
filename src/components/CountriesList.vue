@@ -1,5 +1,5 @@
 <template>
-  <div v-if="filteredCountries.length > 0">
+  <div v-if="countries.length > 0">
     <h1>{{ listTitle }}</h1>
     <span class="p-input-icon-left pb-2 pr-2">
       <i class="pi pi-search" />
