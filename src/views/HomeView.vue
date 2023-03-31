@@ -1,18 +1,33 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <CountriesList :countries="countries" list-title="All countries" />
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+<script>
+  import CountriesList from '@/components/CountriesList.vue';
+
+  export default {
+    components: {
+      CountriesList
+    },
+    data() {
+      return {  
+        countries: []
+      }
+    },
+    mounted() {
+      fetch('https://restcountries.com/v3.1/all?fields=name,flags')
+        .then(res => {
+          return res.json();
+        }).then(data => {
+          this.countries = data;
+          console.log('data', data)
+        }).catch(err => {
+          console.log('err', err)
+        });
+    },
+    name: 'HomeView'
   }
-}
 </script>
