@@ -13,12 +13,18 @@ const routes = [
     name: 'country',
     component: CountryView,
     props: true
-  }
+  },
+  
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(_, __, savedPosition) {
+    return savedPosition
+      ? savedPosition
+      : { left: 0, top: 0};
+  }
 })
 
 export default router

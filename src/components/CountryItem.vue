@@ -5,7 +5,7 @@
       <img :src="flagName" :alt="flagDescription">
     </template>
     <template #footer>
-      <Button @click="redirect">Link</Button>
+      <Button @click="redirect">Learn more</Button>
     </template>
   </Card>
 </template>

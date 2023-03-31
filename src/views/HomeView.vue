@@ -1,32 +1,33 @@
 <template>
   <div>
-    <CountriesList :countries="countries" list-title="All countries" />
+    <CountriesList
+      :countries="countries"
+      list-title="All countries" 
+    />
   </div>
 </template>
 
 
 <script>
   import CountriesList from '@/components/CountriesList.vue';
+  import { mapActions, mapGetters } from 'vuex';
 
   export default {
     components: {
       CountriesList
     },
-    data() {
-      return {  
-        countries: []
-      }
+    computed: {
+      ...mapGetters({
+        countries: 'getAllCountries'
+      })
+    },
+    methods: {
+      ...mapActions([
+        'setAllCountries'
+      ])
     },
     mounted() {
-      fetch('https://restcountries.com/v3.1/all?fields=name,flags')
-        .then(res => {
-          return res.json();
-        }).then(data => {
-          this.countries = data;
-          console.log('data', data)
-        }).catch(err => {
-          console.log('err', err)
-        });
+      this.setAllCountries();
     },
     name: 'HomeView'
   }
